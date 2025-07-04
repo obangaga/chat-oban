@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OBAN CHAT</title>
+  <title>Chat Halfi</title>
   <style>
     :root {
-      --panel: rgba(0, 0, 0, 0.7);
       --accent: #ff0080;
       --text-main: #f0f0f0;
     }
@@ -46,6 +45,16 @@
       border-radius: 10px;
       max-width: 90%;
       word-wrap: break-word;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .user {
@@ -97,7 +106,7 @@
   </style>
 </head>
 <body>
-  <h1>OBAN CHAT AI</h1>
+  <h1>⚡ Chat Halfi Cyberpunk</h1>
   <div id="chat-box"></div>
   <form id="input-form">
     <input type="text" id="user-input" placeholder="Ketik sesuatu..." autocomplete="off" required />
@@ -109,12 +118,23 @@
     const input = document.getElementById('user-input');
     const chatBox = document.getElementById('chat-box');
 
-    function addMessage(text, type) {
+    function addMessage(text, type, typing = false) {
       const div = document.createElement('div');
       div.classList.add('message', type);
-      div.innerText = text;
       chatBox.appendChild(div);
       chatBox.scrollTop = chatBox.scrollHeight;
+
+      if (typing) {
+        let i = 0;
+        const interval = setInterval(() => {
+          div.innerText = text.slice(0, i + 1);
+          i++;
+          chatBox.scrollTop = chatBox.scrollHeight;
+          if (i === text.length) clearInterval(interval);
+        }, 20);
+      } else {
+        div.innerText = text;
+      }
     }
 
     form.addEventListener('submit', (e) => {
@@ -126,7 +146,8 @@
       input.value = '';
 
       setTimeout(() => {
-        addMessage('Ini jawaban dummy dari Halfi dalam suasana cyberpunk 🌌', 'ai');
+        const reply = 'Ini jawaban dummy dari Halfi dengan efek ketikan ✨';
+        addMessage(reply, 'ai', true);
       }, 600);
     });
   </script>

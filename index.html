@@ -14,14 +14,12 @@
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: url('https://images.unsplash.com/photo-1587574293340-ec07297f6b45?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
-      background-size: cover;
+      background: #000000;
       color: var(--text-main);
       display: flex;
       flex-direction: column;
       align-items: center;
       height: 100vh;
-      backdrop-filter: brightness(0.7);
     }
 
     h1 {
@@ -65,7 +63,7 @@
 
     .ai {
       align-self: flex-start;
-      color: #a7f3d0;
+      color: #00ffcc;
       text-align: left;
     }
 
@@ -84,7 +82,7 @@
       border: none;
       border-radius: 8px 0 0 8px;
       outline: none;
-      background: #2d003e;
+      background: #111;
       color: var(--text-main);
     }
 
@@ -146,7 +144,7 @@
       input.value = '';
 
       setTimeout(() => {
-        const reply = 'Ini jawaban dummy dari Halfi dengan efek ketikan ✨';
+        const reply = 'Ini jawaban dummy dari Halfi dalam suasana terminal gelap ✨';
         addMessage(reply, 'ai', true);
       }, 600);
     });

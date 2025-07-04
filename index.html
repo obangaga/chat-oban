@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chat Halfi</title>
+  <title>OBAN CHAT</title>
   <style>
     :root {
       --panel: rgba(0, 0, 0, 0.7);
       --accent: #ff0080;
       --text-main: #f0f0f0;
-      --text-sub: #999;
     }
 
     body {
@@ -37,11 +36,8 @@
       width: 100%;
       max-width: 600px;
       height: 70vh;
-      background: var(--panel);
-      border-radius: 12px;
       padding: 20px;
       overflow-y: auto;
-      box-shadow: 0 0 20px #ff00cc66;
     }
 
     .message {
@@ -54,14 +50,14 @@
 
     .user {
       align-self: flex-end;
-      background: #8800ff;
       color: #fff;
+      text-align: right;
     }
 
     .ai {
       align-self: flex-start;
-      background: #111;
-      color: #00ffd5;
+      color: #a7f3d0;
+      text-align: left;
     }
 
     #input-form {
@@ -101,7 +97,7 @@
   </style>
 </head>
 <body>
-  <h1>⚡ Chat Halfi Cyberpunk</h1>
+  <h1>OBAN CHAT AI</h1>
   <div id="chat-box"></div>
   <form id="input-form">
     <input type="text" id="user-input" placeholder="Ketik sesuatu..." autocomplete="off" required />

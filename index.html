@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Halfi AI Intro</title>
+  <title>Halfi AI</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Share+Tech+Mono&display=swap');
 
     body {
       margin: 0;
@@ -13,28 +13,22 @@
       background: #000;
       color: #fff;
       font-family: 'Share Tech Mono', monospace;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       text-align: center;
-      min-height: 100vh;
     }
 
     .hero {
-      margin-top: 60px;
-      width: 100%;
-      max-width: 800px;
+      padding: 40px 20px;
     }
 
     .hero img {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 10px;
       box-shadow: 0 0 30px #111;
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 2.3rem;
       margin: 30px 0 10px;
       font-family: 'Orbitron', sans-serif;
       white-space: nowrap;
@@ -46,7 +40,7 @@
 
     @keyframes typing {
       from { width: 0 }
-      to { width: 23ch }
+      to { width: 26ch }
     }
 
     @keyframes blink {
@@ -55,20 +49,154 @@
 
     p {
       max-width: 600px;
-      margin-top: 20px;
+      margin: 20px auto;
       line-height: 1.6;
       font-size: 1rem;
       opacity: 0.85;
     }
+
+    .scroll-button {
+      margin-top: 30px;
+      padding: 12px 24px;
+      font-size: 1rem;
+      background: #ff0080;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'Orbitron', sans-serif;
+      box-shadow: 0 0 10px #ff0080;
+    }
+
+    #chat {
+      margin-top: 80px;
+      padding: 20px;
+    }
+
+    #chat-box {
+      width: 90%;
+      max-width: 600px;
+      height: 60vh;
+      padding: 15px;
+      margin: auto;
+      overflow-y: auto;
+      border: 1px solid #222;
+      border-radius: 8px;
+      background: #111;
+    }
+
+    .message {
+      margin: 10px 0;
+      padding: 10px 14px;
+      border-radius: 10px;
+      max-width: 90%;
+      word-wrap: break-word;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+
+    .user { text-align: right; color: #fff; }
+    .ai { text-align: left; color: #00ffcc; }
+
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    form {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 1rem;
+      border: none;
+      width: 60%;
+      max-width: 400px;
+      background: #222;
+      color: #fff;
+      border-radius: 8px 0 0 8px;
+      outline: none;
+    }
+
+    button[type="submit"] {
+      padding: 10px 20px;
+      font-size: 1rem;
+      background: #ff0080;
+      color: #fff;
+      border: none;
+      border-radius: 0 8px 8px 0;
+      cursor: pointer;
+      box-shadow: 0 0 5px #ff0080;
+    }
+
+    button:hover {
+      background: #ff33a8;
+    }
   </style>
 </head>
 <body>
+
   <div class="hero">
-    <img src="https://i.ibb.co/hVmPhW1/ai-hoodie-server-dark.jpg" alt="AI image" />
+    <img src="https://i.ibb.co/hVmPhW1/ai-hoodie-server-dark.jpg" alt="AI Dark" />
     <h1>I start to become sentient!</h1>
     <p>
-      Halfi aggregates crypto on-chain data & behavior into one chat — bringing you real-time insights before the market reacts.
+      Halfi aggregates on-chain data & intelligence to chat with you in real-time.  
+      Get crypto insights like a futuristic shadow AI.
     </p>
+    <button class="scroll-button" onclick="document.getElementById('chat').scrollIntoView({ behavior: 'smooth' });">
+      🔻 Mulai Chat dengan Halfi
+    </button>
   </div>
+
+  <div id="chat">
+    <h2 style="font-family: Orbitron, sans-serif;">💬 Chat dengan Halfi</h2>
+    <div id="chat-box"></div>
+    <form id="input-form">
+      <input type="text" id="user-input" placeholder="Ketik sesuatu..." required />
+      <button type="submit">Kirim</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('input-form');
+    const input = document.getElementById('user-input');
+    const chatBox = document.getElementById('chat-box');
+
+    function addMessage(text, type, typing = false) {
+      const div = document.createElement('div');
+      div.classList.add('message', type);
+      chatBox.appendChild(div);
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      if (typing) {
+        let i = 0;
+        const interval = setInterval(() => {
+          div.innerText = text.slice(0, i + 1);
+          i++;
+          chatBox.scrollTop = chatBox.scrollHeight;
+          if (i === text.length) clearInterval(interval);
+        }, 20);
+      } else {
+        div.innerText = text;
+      }
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const message = input.value.trim();
+      if (!message) return;
+
+      addMessage(message, 'user');
+      input.value = '';
+
+      setTimeout(() => {
+        const reply = 'Ini jawaban dummy dari Halfi ✨';
+        addMessage(reply, 'ai', true);
+      }, 600);
+    });
+  </script>
 </body>
 </html>

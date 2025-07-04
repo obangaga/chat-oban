@@ -1,81 +1,134 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Chat AI Halfi</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat Halfi</title>
   <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #1e293b;
+      --accent: #22c55e;
+      --text-main: #e2e8f0;
+      --text-sub: #94a3b8;
+    }
+
     body {
-      font-family: sans-serif;
-      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 20px;
+      height: 100vh;
     }
+
     h1 {
-      color: #333;
+      margin: 20px 0;
+      font-size: 1.5rem;
+      color: var(--accent);
     }
+
     #chat-box {
       width: 100%;
-      max-width: 500px;
-      height: 400px;
-      background: #fff;
-      border: 1px solid #ccc;
-      padding: 15px;
+      max-width: 600px;
+      height: 70vh;
+      background: var(--panel);
+      border-radius: 12px;
+      padding: 20px;
       overflow-y: auto;
-      margin-bottom: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
     }
+
     .message {
       margin: 10px 0;
+      padding: 10px 14px;
+      border-radius: 10px;
+      max-width: 90%;
+      word-wrap: break-word;
     }
+
     .user {
-      text-align: right;
-      color: blue;
+      align-self: flex-end;
+      background: #334155;
+      color: #dbeafe;
     }
+
     .ai {
-      text-align: left;
-      color: green;
+      align-self: flex-start;
+      background: #475569;
+      color: #a7f3d0;
     }
+
     #input-form {
-      display: flex;
       width: 100%;
-      max-width: 500px;
+      max-width: 600px;
+      display: flex;
+      padding: 10px;
+      box-sizing: border-box;
     }
+
     #user-input {
       flex: 1;
-      padding: 10px;
-      font-size: 16px;
+      padding: 12px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px 0 0 8px;
+      outline: none;
+      background: #334155;
+      color: var(--text-main);
     }
+
     button {
-      padding: 10px 15px;
-      font-size: 16px;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border: none;
+      background: var(--accent);
+      color: #0f172a;
+      border-radius: 0 8px 8px 0;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #16a34a;
     }
   </style>
 </head>
 <body>
-  <h1>Chat dengan Halfi 🤖</h1>
+  <h1>Chat Halfi 🤖</h1>
   <div id="chat-box"></div>
   <form id="input-form">
-    <input type="text" id="user-input" placeholder="Tulis pesan..." required />
+    <input type="text" id="user-input" placeholder="Tulis sesuatu..." autocomplete="off" required />
     <button type="submit">Kirim</button>
   </form>
+
   <script>
     const form = document.getElementById('input-form');
     const input = document.getElementById('user-input');
     const chatBox = document.getElementById('chat-box');
 
-    form.addEventListener('submit', async (e) => {
+    function addMessage(text, type) {
+      const div = document.createElement('div');
+      div.classList.add('message', type);
+      div.innerText = text;
+      chatBox.appendChild(div);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const message = input.value;
+      const message = input.value.trim();
       if (!message) return;
 
-      chatBox.innerHTML += `<div class="message user"><b>Kamu:</b> ${message}</div>`;
+      addMessage(message, 'user');
       input.value = '';
-      chatBox.scrollTop = chatBox.scrollHeight;
 
-      const aiReply = "Ini respon dummy dari Halfi (nanti kita sambung ke AI 😎)";
-      chatBox.innerHTML += `<div class="message ai"><b>Halfi:</b> ${aiReply}</div>`;
-      chatBox.scrollTop = chatBox.scrollHeight;
+      setTimeout(() => {
+        addMessage('Ini jawaban dummy dari Halfi (belum konek ke AI)', 'ai');
+      }, 600);
     });
   </script>
 </body>

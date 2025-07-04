@@ -85,6 +85,7 @@
       border-radius: 8px;
       background-color: #111;
       margin-bottom: 10px;
+      text-align: left;
     }
 
     #userInput {
@@ -111,8 +112,8 @@
 </head>
 <body>
   <div class="overlay">
-    <h1>Ayo kita mulai lerr</h1>
-    <p>Oban chatbot dilatih untuk kalian semua,Tanyakan apasaja kepadaku dan aku akan membantumu.. Ayo jangan jadi orang BODOH !!</p>
+    <h1>Oban Chat Cyberpunk</h1>
+    <p>OBAN BOT dilatih untuk menjawab pertanyaanmu tentang dunia crypto, token degen, dan apapun yang kamu pikirkan. Ayo mulai ngobrol!</p>
     <button class="scroll-btn" onclick="document.getElementById('chat').scrollIntoView({ behavior: 'smooth' });">
       ▼ Mulai Chat dengan Oban
     </button>
@@ -120,137 +121,7 @@
     <div id="chat" class="chat-section">
       <h2>💬 Chat dengan Oban</h2>
       <div id="chatBox"></div>
-      <input type="text" id="userInput" placeholder="Ketik sesuatu...">
-      <button id="sendBtn">Kirim</button>
-    </div>
-  </div>
-
-  <script>
-    const chatBox = document.getElementById("chatBox");
-    const userInput = document.getElementById("userInput");
-    co<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>OBAN BOT | Oban Chat</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      color: white;
-      background-image: url('https://raw.githubusercontent.com/obangaga/chat-oban/main/Screenshot_20250704-223812_X.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-    }
-
-    .overlay {
-      background-color: rgba(0, 0, 0, 0.85);
-      min-height: 100vh;
-      padding: 40px 20px;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 2em;
-      margin-bottom: 0.5em;
-      color: #ff00cc;
-      animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 0.15em solid #ff00cc;
-      width: 20ch;
-      margin: 0 auto 1em;
-    }
-
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 20ch }
-    }
-
-    @keyframes blink-caret {
-      from, to { border-color: transparent }
-      50% { border-color: #ff00cc; }
-    }
-
-    p {
-      color: #ccc;
-      max-width: 600px;
-      margin: 0 auto 20px;
-      line-height: 1.5;
-    }
-
-    .scroll-btn {
-      margin: 20px 0;
-      padding: 10px 20px;
-      background-color: #ff00cc;
-      border: none;
-      color: white;
-      font-weight: bold;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .scroll-btn:hover {
-      background-color: #e600a8;
-    }
-
-    .chat-section {
-      max-width: 600px;
-      margin: 40px auto;
-      background-color: rgba(20, 20, 20, 0.9);
-      border-radius: 12px;
-      padding: 20px;
-    }
-
-    #chatBox {
-      height: 300px;
-      overflow-y: auto;
-      border: 1px solid #555;
-      padding: 10px;
-      border-radius: 8px;
-      background-color: #111;
-      margin-bottom: 10px;
-    }
-
-    #userInput {
-      width: 75%;
-      padding: 10px;
-      border-radius: 5px;
-      border: none;
-      margin-right: 5px;
-    }
-
-    #sendBtn {
-      background-color: #ff00cc;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 5px;
-      color: white;
-      cursor: pointer;
-    }
-
-    #sendBtn:hover {
-      background-color: #e600a8;
-    }
-  </style>
-</head>
-<body>
-  <div class="overlay">
-    <h1>Ayo kita mulai lerr</h1>
-    <p>Oban chatbot dilatih untuk kalian semua,Tanyakan apasaja kepadaku dan aku akan membantumu.. Ayo jangan jadi orang BODOH !!</p>
-    <button class="scroll-btn" onclick="document.getElementById('chat').scrollIntoView({ behavior: 'smooth' });">
-      ▼ Mulai Chat dengan Oban
-    </button>
-
-    <div id="chat" class="chat-section">
-      <h2>💬 Chat dengan Oban</h2>
-      <div id="chatBox"></div>
-      <input type="text" id="userInput" placeholder="Ketik sesuatu...">
+      <input type="text" id="userInput" placeholder="Tanya sesuatu...">
       <button id="sendBtn">Kirim</button>
     </div>
   </div>
@@ -272,38 +143,21 @@
       appendMessage("🧠 Kamu", msg);
       userInput.value = "";
 
-      setTimeout(() => {
-        appendMessage("🤖 Halfi", "Sedang menganalisis data on-chain...");
-      }, 800);
-    }
+      appendMessage("🤖 Oban", "Mengetik...");
 
-    function appendMessage(sender, text) {
-      const msgDiv = document.createElement("div");
-      msgDiv.style.margin = "5px 0";
-      msgDiv.innerHTML = `<strong>${sender}:</strong> ${text}`;
-      chatBox.appendChild(msgDiv);
-      chatBox.scrollTop = chatBox.scrollHeight;
-    }
-  </script>
-</body>
-</html>
-nst sendBtn = document.getElementById("sendBtn");
-
-    sendBtn.addEventListener("click", sendMessage);
-    userInput.addEventListener("keypress", function(e) {
-      if (e.key === "Enter") sendMessage();
-    });
-
-    function sendMessage() {
-      const msg = userInput.value.trim();
-      if (!msg) return;
-
-      appendMessage("🧠 Kamu", msg);
-      userInput.value = "";
-
-      setTimeout(() => {
-        appendMessage("🤖 Halfi", "Sedang menganalisis data on-chain...");
-      }, 800);
+      fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: msg })
+      })
+      .then(res => res.json())
+      .then(data => {
+        chatBox.lastChild.innerHTML = `<strong>🤖 Oban:</strong> ${data.reply}`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+      })
+      .catch(() => {
+        chatBox.lastChild.innerHTML = `<strong>🤖 Oban:</strong> Gagal mengambil jawaban.`;
+      });
     }
 
     function appendMessage(sender, text) {

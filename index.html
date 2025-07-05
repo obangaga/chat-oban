@@ -4,117 +4,395 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Oban Chat Cyberpunk</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      color: white;
-      background-image: url('https://raw.githubusercontent.com/obangaga/chat-oban/main/Screenshot_20250704-223812_X.jpg');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
+      padding: 0;
+      box-sizing: border-box;
     }
-    .overlay {
-      background-color: rgba(0, 0, 0, 0.85);
+    
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: white;
+      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
       min-height: 100vh;
-      padding: 40px 20px;
+      overflow-x: hidden;
+    }
+    
+    .overlay {
+      padding: 30px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
       text-align: center;
     }
-    h1 {
-      font-size: 2em;
-      color: #ff00cc;
-      animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 0.15em solid #ff00cc;
-      width: 20ch;
-      margin: 0 auto 1em;
-    }
-    @keyframes typing { from { width: 0 } to { width: 20ch } }
-    @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #ff00cc; } }
-
-    .chat-section {
-      max-width: 600px;
-      margin: 40px auto;
-      background: rgba(20,20,20,0.9);
+    
+    header {
+      margin-bottom: 30px;
       padding: 20px;
-      border-radius: 12px;
+      border-radius: 15px;
+      background: rgba(10, 15, 30, 0.7);
+      box-shadow: 0 0 20px rgba(255, 0, 204, 0.3);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 0, 204, 0.2);
     }
-    #chatBox {
-      height: 300px;
-      overflow-y: auto;
-      border: 1px solid #555;
-      background: #111;
-      padding: 10px;
-      border-radius: 8px;
+    
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5em;
+      color: #ff00cc;
+      margin-bottom: 15px;
+      text-shadow: 0 0 10px rgba(255, 0, 204, 0.7);
+      position: relative;
+      display: inline-block;
+    }
+    
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 10%;
+      width: 80%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #ff00cc, transparent);
+    }
+    
+    .tagline {
+      font-size: 1.2em;
+      color: #b0b0ff;
+      margin-bottom: 20px;
+      line-height: 1.6;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin: 30px 0;
+    }
+    
+    .feature {
+      background: rgba(30, 40, 80, 0.6);
+      border-radius: 10px;
+      padding: 20px;
+      width: 220px;
+      border: 1px solid rgba(100, 100, 255, 0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .feature:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 200, 255, 0.4);
+      background: rgba(40, 50, 100, 0.7);
+    }
+    
+    .feature i {
+      font-size: 2.5em;
+      color: #00ccff;
+      margin-bottom: 15px;
+    }
+    
+    .feature h3 {
+      color: #ff00cc;
       margin-bottom: 10px;
     }
-    #userInput {
-      width: 70%;
-      padding: 10px;
-      border-radius: 5px;
-      border: none;
+    
+    .chat-section {
+      max-width: 700px;
+      margin: 40px auto;
+      background: rgba(15, 20, 40, 0.9);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(0, 200, 255, 0.2);
+      border: 1px solid rgba(100, 100, 255, 0.1);
     }
-    #sendBtn {
-      background-color: #ff00cc;
+    
+    .chat-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      gap: 15px;
+    }
+    
+    .chat-header h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: #00ccff;
+      font-size: 1.8em;
+    }
+    
+    .avatar {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #ff00cc, #00ccff);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5em;
+    }
+    
+    #chatBox {
+      height: 350px;
+      overflow-y: auto;
+      border: 1px solid rgba(100, 100, 255, 0.3);
+      background: rgba(10, 15, 30, 0.6);
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .user-message, .bot-message {
+      max-width: 80%;
+      padding: 12px 18px;
+      border-radius: 18px;
+      position: relative;
+      animation: fadeIn 0.3s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .user-message {
+      align-self: flex-end;
+      background: linear-gradient(135deg, #ff00cc, #cc00ff);
+      border-bottom-right-radius: 5px;
+    }
+    
+    .bot-message {
+      align-self: flex-start;
+      background: linear-gradient(135deg, #00aaff, #00ccff);
+      border-bottom-left-radius: 5px;
+    }
+    
+    .message-content {
+      line-height: 1.5;
+    }
+    
+    .input-area {
+      display: flex;
+      gap: 10px;
+    }
+    
+    #userInput {
+      flex-grow: 1;
+      padding: 12px 15px;
+      border-radius: 25px;
       border: none;
-      padding: 10px;
-      border-radius: 5px;
+      background: rgba(20, 30, 60, 0.8);
+      color: white;
+      font-size: 1em;
+      border: 1px solid rgba(100, 100, 255, 0.3);
+      transition: all 0.3s;
+    }
+    
+    #userInput:focus {
+      outline: none;
+      border-color: #00ccff;
+      box-shadow: 0 0 10px rgba(0, 200, 255, 0.5);
+    }
+    
+    #sendBtn {
+      background: linear-gradient(135deg, #ff00cc, #cc00ff);
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
       color: white;
       cursor: pointer;
+      font-size: 1.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
     }
-    #sendBtn:hover { background-color: #e600a8; }
+    
+    #sendBtn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 0, 204, 0.6);
+    }
+    
+    footer {
+      margin-top: 40px;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #8899cc;
+      border-top: 1px solid rgba(100, 100, 255, 0.2);
+    }
+    
+    .typing-indicator {
+      display: none;
+      align-self: flex-start;
+      background: rgba(30, 40, 80, 0.6);
+      padding: 12px 18px;
+      border-radius: 18px;
+      border-bottom-left-radius: 5px;
+    }
+    
+    .typing-dots {
+      display: flex;
+      gap: 5px;
+    }
+    
+    .typing-dot {
+      width: 8px;
+      height: 8px;
+      background: #00ccff;
+      border-radius: 50%;
+      animation: bounce 1.4s infinite ease-in-out;
+    }
+    
+    .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+    .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+    
+    @keyframes bounce {
+      0%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-8px); }
+    }
+    
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2em;
+      }
+      
+      .tagline {
+        font-size: 1em;
+      }
+      
+      .feature {
+        width: 100%;
+        max-width: 300px;
+      }
+      
+      .chat-section {
+        padding: 15px;
+      }
+      
+      #chatBox {
+        height: 300px;
+      }
+      
+      .user-message, .bot-message {
+        max-width: 90%;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="overlay">
-    <h1>Oban Chat Bot Lerr</h1>
-    <p>OBAN BOT dilatih untuk menjawab pertanyaanmu tentang apa saja yang ada di dunia,Jangan Jadi Bodoh Di Era AI . Ayo mulai Belajar Dengan OBAN!</p>
+    <header>
+      <h1><i class="fas fa-robot"></i> Oban Chat Bot</h1>
+      <p class="tagline">OBAN BOT dilatih untuk menjawab pertanyaanmu tentang apa saja yang ada di dunia. Jangan jadi bodoh di era AI. Ayo mulai belajar dengan OBAN!</p>
+      
+      <div class="features">
+        <div class="feature">
+          <i class="fas fa-brain"></i>
+          <h3>AI Cerdas</h3>
+          <p>Dibangun dengan teknologi kecerdasan buatan terkini</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-bolt"></i>
+          <h3>Cepat & Responsif</h3>
+          <p>Respon instan untuk semua pertanyaan Anda</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-graduation-cap"></i>
+          <h3>Pendidikan</h3>
+          <p>Membantu Anda belajar topik apa pun</p>
+        </div>
+      </div>
+    </header>
     
     <div class="chat-section">
-      <h2>💬 Chat dengan Oban</h2>
-      <div id="chatBox"></div>
-      <input type="text" id="userInput" placeholder="Tanya sesuatu...">
-      <button id="sendBtn">Kirim</button>
+      <div class="chat-header">
+        <div class="avatar">
+          <i class="fas fa-robot"></i>
+        </div>
+        <h2>Chat dengan Oban</h2>
+      </div>
+      
+      <div id="chatBox">
+        <!-- Chat messages will appear here -->
+      </div>
+      
+      <div class="input-area">
+        <input type="text" id="userInput" placeholder="Tulis pesanmu di sini...">
+        <button id="sendBtn"><i class="fas fa-paper-plane"></i></button>
+      </div>
     </div>
+    
+    <footer>
+      <p>© 2023 Oban Chat Bot | Dibangun dengan ❤️ untuk pendidikan AI | Versi 2.0</p>
+    </footer>
   </div>
 
   <script>
     const chatBox = document.getElementById("chatBox");
     const userInput = document.getElementById("userInput");
     const sendBtn = document.getElementById("sendBtn");
-
+    
+    // Create typing indicator
+    const typingIndicator = document.createElement("div");
+    typingIndicator.className = "typing-indicator";
+    typingIndicator.innerHTML = `
+      <div class="typing-dots">
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+      </div>
+    `;
+    
+    // Initial bot message
+    window.onload = function() {
+      setTimeout(() => {
+        addBotMessage("Halo! Saya OBAN BOT. 🤖 Saya di sini untuk membantu Anda belajar dan menjawab pertanyaan Anda. Ada yang bisa saya bantu hari ini?");
+      }, 800);
+    };
+    
+    // Send message on button click
     sendBtn.addEventListener("click", sendMessage);
+    
+    // Send message on Enter key
     userInput.addEventListener("keypress", (e) => {
       if (e.key === "Enter") sendMessage();
     });
-
-    function appendMessage(sender, text) {
-      const msg = document.createElement("div");
-      msg.innerHTML = `<strong>${sender}:</strong> ${text}`;
-      chatBox.appendChild(msg);
+    
+    // Add message to chat
+    function addMessage(sender, text, isUser = false) {
+      const messageDiv = document.createElement("div");
+      messageDiv.className = isUser ? "user-message" : "bot-message";
+      
+      const content = document.createElement("div");
+      content.className = "message-content";
+      content.innerHTML = `<strong>${isUser ? '🧠 Anda' : '🤖 Oban'}:</strong> ${text}`;
+      
+      messageDiv.appendChild(content);
+      chatBox.appendChild(messageDiv);
+      
+      // Scroll to bottom
       chatBox.scrollTop = chatBox.scrollHeight;
     }
-
-    async function sendMessage() {
-      const text = userInput.value.trim();
-      if (!text) return;
-      appendMessage("🧠 Kamu", text);
-      userInput.value = "";
-
-      try {
-        const res = await fetch("/api/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: text })
-        });
-        const data = await res.json();
-        appendMessage("🤖 Oban", data.reply);
-      } catch (e) {
-        appendMessage("🤖 Oban", "Maaf, OBAN BOT lagi error 😅");
+    
+    // Add bot message with typing effect
+    function addBotMessage(text) {
+      // Remove typing indicator if exists
+      if (chatBox.contains(typingIndicator)) {
+        chatBox.removeChild(typingIndicator);
       }
-    }
-  </script>
-</body>
-</html>
+      
+      const messageDiv = document.createElement("div");
+      messageDiv.className = "bot-message";
+      
+      const content = document.createElement("div");
+      content.className = "message-content";
+      content.innerHTML = `<strong>🤖 O

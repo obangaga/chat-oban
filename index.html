@@ -395,4 +395,111 @@
       
       const content = document.createElement("div");
       content.className = "message-content";
-      content.innerHTML = `<strong>🤖 O
+      content.innerHTML = `<strong>🤖 Oban:</strong> ${text}`;
+      
+      messageDiv.appendChild(content);
+      chatBox.appendChild(messageDiv);
+      
+      // Scroll to bottom
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+    
+    // Show typing indicator
+    function showTypingIndicator() {
+      chatBox.appendChild(typingIndicator);
+      typingIndicator.style.display = "block";
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+    
+    // Hide typing indicator
+    function hideTypingIndicator() {
+      typingIndicator.style.display = "none";
+    }
+    
+    // Get bot response
+    function getBotResponse(input) {
+      input = input.toLowerCase().trim();
+      
+      // Respons dasar
+      if (input === "halo" || input === "hai" || input === "helo" || input === "hi" || input === "hallo") {
+        return "Halo juga! Ada yang bisa OBAN BOT bantu hari ini? 😊";
+      }
+      
+      if (input.includes("apa kabar") || input.includes("how are you") || input.includes("gimana kabarnya")) {
+        return "Saya lagi semangat nge-gas dan siap membantu Anda! 🚀 Bagaimana dengan hari Anda?";
+      }
+      
+      if (input.includes("terima kasih") || input.includes("thanks") || input.includes("makasih")) {
+        return "Sama-sama! Senang bisa membantu. 👍";
+      }
+      
+      if (input.includes("perkenalkan") || input.includes("siapa kamu") || input.includes("siapa anda")) {
+        return "Saya OBAN BOT, asisten AI yang dirancang khusus untuk membantu Anda belajar dan menjelajahi dunia pengetahuan! 🤖";
+      }
+      
+      if (input.includes("ai") || input.includes("kecerdasan buatan") || input.includes("artificial intelligence")) {
+        return "AI (Kecerdasan Buatan) adalah simulasi kecerdasan manusia yang dimodelkan di dalam mesin. Teknologi ini memungkinkan mesin untuk belajar dari pengalaman, menyesuaikan input-input baru, dan melaksanakan tugas seperti manusia. Mau tahu lebih banyak?";
+      }
+      
+      if (input.includes("belajar") || input.includes("tutorial") || input.includes("pelajaran")) {
+        return "Saya bisa membantu Anda belajar berbagai topik! Pemrograman, matematika, sains, sejarah, atau bahkan seni. Topik apa yang ingin Anda pelajari hari ini?";
+      }
+      
+      if (input.includes("pemrograman") || input.includes("coding") || input.includes("programming")) {
+        return "Pemrograman adalah proses menulis kode untuk membuat program komputer. Bahasa populer termasuk Python, JavaScript, Java, dan C++. Saya bisa membantu Anda memulai dengan dasar-dasar pemrograman. Mau mulai dengan bahasa apa?";
+      }
+      
+      if (input.includes("python") || input.includes("javascript") || input.includes("java")) {
+        return `Bagus! ${input.charAt(0).toUpperCase() + input.slice(1)} adalah bahasa pemrograman yang populer. Saya bisa memberikan contoh kode, menjelaskan konsep dasar, atau membantu dengan masalah spesifik. Apa yang ingin Anda ketahui?`;
+      }
+      
+      if (input.includes("sains") || input.includes("science") || input.includes("fisika") || input.includes("kimia") || input.includes("biologi")) {
+        return "Sains adalah bidang yang menarik! Saya bisa menjelaskan konsep ilmiah, teori populer, atau membantu dengan pekerjaan rumah sains Anda. Topik spesifik apa yang Anda minati?";
+      }
+      
+      if (input.includes("sejarah") || input.includes("history")) {
+        return "Sejarah penuh dengan cerita menarik! Mulai dari peradaban kuno hingga peristiwa modern. Periode atau peristiwa sejarah apa yang ingin Anda pelajari?";
+      }
+      
+      if (input.includes("seni") || input.includes("art") || input.includes("musik") || input.includes("music")) {
+        return "Seni adalah ekspresi kreativitas manusia yang indah. Saya bisa membahas berbagai aliran seni, seniman terkenal, atau teori seni. Apa yang ingin Anda ketahui tentang dunia seni?";
+      }
+      
+      if (input.includes("bye") || input.includes("selesai") || input.includes("sampai jumpa") || input.includes("daah")) {
+        return "Terima kasih sudah mengobrol dengan saya! Sampai jumpa lagi. Jangan ragu untuk kembali kapan saja jika Anda butuh bantuan. 👋";
+      }
+      
+      // Default response
+      const randomResponses = [
+        "Pertanyaan menarik! Bisa Anda jelaskan lebih detail?",
+        "Saya masih belajar memahami konteks penuh. Bisa beri tahu lebih banyak?",
+        "Wah, topik yang kompleks. Saya bisa membantu menjelaskan aspek-aspek tertentu jika Anda lebih spesifik.",
+        "Saya ingin memastikan saya mengerti dengan benar. Bisa Anda ulangi dengan cara berbeda?",
+        "Saat ini pengetahuan saya tentang itu masih terbatas. Ada topik lain yang ingin Anda tanyakan?",
+        "Saya sedang mengembangkan kemampuan saya untuk topik itu. Sementara itu, apa ada topik lain yang bisa saya bantu?"
+      ];
+      return randomResponses[Math.floor(Math.random() * randomResponses.length)];
+    }
+    
+    // Send message function
+    function sendMessage() {
+      const text = userInput.value.trim();
+      if (!text) return;
+      
+      // Add user message
+      addMessage("Anda", text, true);
+      userInput.value = "";
+      
+      // Show typing indicator
+      showTypingIndicator();
+      
+      // Simulate bot thinking
+      setTimeout(() => {
+        hideTypingIndicator();
+        const response = getBotResponse(text);
+        addBotMessage(response);
+      }, 1200);
+    }
+  </script>
+</body>
+</html>
